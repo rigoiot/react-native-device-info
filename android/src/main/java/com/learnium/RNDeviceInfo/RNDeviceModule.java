@@ -7,6 +7,8 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.provider.Settings.Secure;
 
+import android.telephony.TelephonyManager;
+
 import com.google.android.gms.iid.InstanceID;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -69,6 +71,11 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
     return layout == Configuration.SCREENLAYOUT_SIZE_LARGE || layout == Configuration.SCREENLAYOUT_SIZE_XLARGE;
   }
 
+  private String getIMEI() {
+    TelephonyManager tm = (TelephonyManager) this.reactContext.getSystemService(Context.TELEPHONY_SERVICE);
+    return tm.getDeviceId();
+  }
+
   @Override
   public @Nullable Map<String, Object> getConstants() {
     HashMap<String, Object> constants = new HashMap<String, Object>();
@@ -113,6 +120,7 @@ public class RNDeviceModule extends ReactContextBaseJavaModule {
     constants.put("timezone", TimeZone.getDefault().getID());
     constants.put("isEmulator", this.isEmulator());
     constants.put("isTablet", this.isTablet());
+    constants.put("imei", this.getIMEI());
     return constants;
   }
 }

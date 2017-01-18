@@ -3,6 +3,7 @@
  */
 
 var RNDeviceInfo = require('react-native').NativeModules.RNDeviceInfo;
+var Platform = require('react-native').Platform;
 
 module.exports = {
   getUniqueID: function () {
@@ -62,4 +63,11 @@ module.exports = {
   isTablet: function() {
     return RNDeviceInfo.isTablet;
   },
+  getIMEI: function() {
+    if (Platform.OS === "android") {
+      return RNDeviceInfo.imei;
+    } else {
+      return '';
+    }
+  }
 };
