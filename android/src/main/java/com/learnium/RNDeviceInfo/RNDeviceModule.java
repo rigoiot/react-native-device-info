@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.provider.Settings.Secure;
 
+import android.content.Context;
 import android.telephony.TelephonyManager;
 
 import com.google.android.gms.iid.InstanceID;
